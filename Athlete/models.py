@@ -19,6 +19,7 @@ class NOC(models.Model):
         help_text=_('Notes about the NOC')
         )
 
+
 class Athlete(models.Model):
     """docstring for Athlete"""
     name = models.CharField(
@@ -30,12 +31,6 @@ class Athlete(models.Model):
         max_length=1,
         verbose_name=_('Athlete sex'),
         help_text=_('Sex of the athlete')
-        )
-    age = models.IntegerField(
-        null=True,
-        blank=True,
-        verbose_name=_('Athlete age'),
-        help_text=_('Age of the athlete'),
         )
     height = models.IntegerField(
         null=True,
@@ -52,9 +47,11 @@ class Athlete(models.Model):
     noc = models.ForeignKey(
         NOC,
         verbose_name=_('National Olympic Committee'),
-        help_text=_('National Olympic Committee 3 letter code'),
+        help_text=_('National Olympic Committee represented by the Athlete'),
         on_delete=models.CASCADE
         )
+
+
 class Olympics(models.Model):
     """Games,Year and Season"""
     name = models.CharField(
@@ -106,6 +103,7 @@ class City(models.Model):
         help_text=_('Name of the city')
         )
 
+
 class Participation(models.Model):
     """Medals,Team"""
     medal = models.CharField(
@@ -117,6 +115,18 @@ class Participation(models.Model):
         max_length=255,
         verbose_name=_('Team name'),
         help_text=_('Team of the participant'),
+        )
+    age = models.IntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_('Athlete age'),
+        help_text=_('Age of the athlete'),
+        )
+    athlete = models.ForeignKey(
+        Athlete,
+        verbose_name=_('Athlete'),
+        help_text=_('Athlete that participated'),
+        on_delete=models.CASCADE
         )
     city = models.ForeignKey(
         City,
