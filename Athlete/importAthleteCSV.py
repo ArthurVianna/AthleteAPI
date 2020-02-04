@@ -4,6 +4,18 @@ from Athlete.models import *
 def readFileAsDict(path):
     return csv.DictReader(open(path))
 
+def importNOCCSV(path):
+    openedCSV = readFileAsDict(path)
+
+    for row in openedCSV:
+        print(row)
+        noc = row["NOC"]
+        nocObj,created = NOC.objects.get_or_create(noc=noc)
+        nocObj.region = row["region"]
+        nocObj.notes = row["notes"]
+
+        nocObj.save()
+
 
 def importCSV(path):
     openedCSV = readFileAsDict(path)
