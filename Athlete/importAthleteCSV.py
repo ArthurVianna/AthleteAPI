@@ -16,8 +16,24 @@ def importNOCCSV(path):
 
         nocObj.save()
 
+def validateNOCCSV(path):
+    needed_data = ["NOC", "region", "notes"]
+    return validateCSV(path,needed_data)
 
-def importCSV(path):
+def validateAthleteCSV(path):
+    needed_data = ["NOC", "Name", "Sex","Height","Weight","Games","Year","Season","City","Sport","Event","Medal","Age","Team"]
+    return validateCSV(path,needed_data)
+    
+
+def validateCSV(path,needed_data):
+    columns = set()
+    with open(path, 'rt') as fin:
+        csvin = csv.reader(fin)
+        columns.update(next(csvin, []))
+    fin.close()
+    return all(elem in columns for elem in needed_data)
+
+def importAthleteCSV(path):
     openedCSV = readFileAsDict(path)
     
     for row in openedCSV:
@@ -42,6 +58,8 @@ def importCSV(path):
 
 
         Participation.objects.get_or_create(**kwargs)
+
+
     
         
 
