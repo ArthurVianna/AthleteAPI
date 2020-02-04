@@ -26,6 +26,8 @@ def validateAthleteCSV(path):
     
 
 def validateCSV(path,needed_data):
+    if not path.endswith(".csv"):
+        return False
     columns = set()
     with open(path, 'rt') as fin:
         csvin = csv.reader(fin)
