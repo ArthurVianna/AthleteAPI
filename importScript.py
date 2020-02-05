@@ -1,7 +1,7 @@
 import os
 import sys
 import django
-
+import threading
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "AthleteAPI.settings")
 django.setup()
 
