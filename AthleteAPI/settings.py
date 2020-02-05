@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4!@x6)i!_b*1gspo#v!bb-f%an#ajv8a&ak3=l!du^bn2kd7eh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
@@ -77,17 +77,6 @@ WSGI_APPLICATION = 'AthleteAPI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-                'ENGINE': 'django.db.backends.mysql',
-                'NAME': 'athlete',
-                'USER': 'Arthur',
-                'PASSWORD': 'abc123',
-                'HOST': '127.0.0.1',
-                'PORT': '3307'
-            }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -133,12 +122,5 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
 
 django_heroku.settings(locals())
