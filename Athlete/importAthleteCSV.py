@@ -8,7 +8,6 @@ def importNOCCSV(path):
     openedCSV = readFileAsDict(path)
 
     for row in openedCSV:
-        print(row)
         noc = row["NOC"]
         nocObj,created = NOC.objects.get_or_create(noc=noc)
         nocObj.region = row["region"]
@@ -56,6 +55,8 @@ def importAthleteCSV(path):
         kwargs["age"] = parseToIntOrNone(row["Age"])
         if(row["Medal"] != "NA"):
             kwargs["medal"] = row["Medal"]
+        else:
+            kwargs["medal__isnull"] = True
         kwargs["team"] = row["Team"]
 
 
