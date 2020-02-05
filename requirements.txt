@@ -1,5 +1,6 @@
 Django~=2.2.4
 mysqlclient
+psycopg2
 djangorestframework
 django-heroku
 gunicorn
